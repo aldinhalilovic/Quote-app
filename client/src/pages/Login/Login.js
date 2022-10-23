@@ -1,30 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../service/LoginContext";
-import axios from "axios";
-
+import LocalStorage from "../../helpers/LocalStorage";
 function Login() {
-  const [loginUsername, setLoginUsername] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
   const [localUsername, setLocalUsername] = useState("");
   const [localPassword, setLocalPassword] = useState("");
-  const [token, setToken] = useState(null);
 
-  const getToken = () => {
-    axios
-      .post("http://localhost:8000/sessions", {
-        username: loginUsername,
-        password: loginPassword,
-      })
-      .then((response) => setToken(response.data))
-      .then(() => (token !== null ? navigate("/homepage") : ""));
-  };
-  //   const { setLoginPassword, setLoginUsername, getToken, token } =
-  //     useContext(LoginContext);
+  const {
+    setLoginPassword,
+    setLoginUsername,
+    getToken,
+    token,
+    rememberMe,
+    setRememberMe,
+  } = useContext(LoginContext);
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {};
+  useEffect(() => {
+    if (token && rememberMe) {
+      LocalStorage.setLocalStorage("token", token);
+      navigate("/homepage");
+    } else if (token) {
+      navigate("/homepage");
+    }
+  }, [token]);
 
   return (
     <div>
@@ -38,7 +38,6 @@ function Login() {
         <input
           type="password"
           placeholder="Password"
-          //   value={localPassword}
           onChange={(e) => setLocalPassword(e.target.value)}
         />
         <button
@@ -49,6 +48,7 @@ function Login() {
         >
           submit
         </button>
+        <input type="checkbox" onClick={() => setRememberMe(true)} />
       </form>
     </div>
   );

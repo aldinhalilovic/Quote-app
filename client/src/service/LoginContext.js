@@ -6,7 +6,9 @@ const LoginContext = createContext();
 function LoginContextProvider({ children }) {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [token, setToken] = useState(null);
+  // const [quotes, setQuotes] = useState(null);
 
   const getToken = () => {
     axios
@@ -14,15 +16,19 @@ function LoginContextProvider({ children }) {
         username: loginUsername,
         password: loginPassword,
       })
-      .then((response) => setToken(response.data))
-      .then(() => console.log(token));
+      .then((response) => {
+        setToken(response.data.accessToken);
+      });
   };
 
   const values = {
     setLoginUsername,
     setLoginPassword,
     getToken,
+    setToken,
     token,
+    rememberMe,
+    setRememberMe,
   };
 
   return (

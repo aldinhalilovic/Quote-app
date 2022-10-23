@@ -3,11 +3,15 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { LoginContextProvider } from "./service/LoginContext";
+import { QuoteContextProvider } from "./service/QuoteContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <BrowserRouter>
     <LoginContextProvider>
-      <App />
+      <QuoteContextProvider>
+        <App />
+      </QuoteContextProvider>
     </LoginContextProvider>
   </BrowserRouter>
 );
