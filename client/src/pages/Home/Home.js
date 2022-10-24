@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../service/LoginContext";
 import LocalStorage from "../../helpers/LocalStorage";
 import { QuoteContext } from "../../service/QuoteContext";
+import QuoteCard from "../../components/QuoteCard/QuoteCard";
 
 function Home() {
-  const { getQuotes } = useContext(QuoteContext);
+  const { getQuotes, quoteList } = useContext(QuoteContext);
   const { token, setToken, rememberMe } = useContext(LoginContext);
   const navigate = useNavigate();
 
@@ -28,11 +29,24 @@ function Home() {
 
   useEffect(() => {
     getQuotes();
+    console.log(quoteList);
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <h1>HOMEPAGE</h1>
+      {quoteList?.map((el) => (
+        <div key={el.id}>
+          <QuoteCard el={el} />
+        </div>
+      ))}
       <button type="submit" onClick={logout}>
         {" "}
         LOGOUT

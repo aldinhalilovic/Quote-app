@@ -48,7 +48,11 @@ function Login() {
         >
           submit
         </button>
-        <input type="checkbox" onClick={() => setRememberMe(true)} />
+        {rememberMe ? (
+          <input type="checkbox" onClick={() => setRememberMe(false)} />
+        ) : (
+          <input type="checkbox" onClick={() => setRememberMe(true)} />
+        )}
       </form>
     </div>
   );

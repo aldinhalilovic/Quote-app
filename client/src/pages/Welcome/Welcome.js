@@ -12,7 +12,6 @@ function Welcome() {
       <br />
       <br />
       <br />
-
       <button onClick={() => navigate("/login")}>Go to login</button>
     </div>
   );
