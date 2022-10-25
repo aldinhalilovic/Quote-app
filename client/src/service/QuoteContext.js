@@ -10,15 +10,25 @@ function QuoteContextProvider({ children }) {
   const [lclToken, setLclToken] = useState(localToken);
   const { token } = useContext(LoginContext);
   const [quoteList, setQuoteList] = useState();
+  const [deletedUpVote, setDeletedUpVote] = useState();
+  const [deletedDownVote, setDeletedDownVote] = useState();
 
   const getQuotes = () => {
     axios
-      .get("http://localhost:8000/quotes?pageSize=10", {
+      .get("http://localhost:8000/quotes", {
         headers: { Authorization: "Bearer " + (token || lclToken) },
       })
       .then(
         (res) => (console.log(res.data.quotes), setQuoteList(res.data.quotes))
       );
+  };
+
+  const getQuotesTag = (tags) => {
+    axios
+      .get(`http://localhost:8000/quotes?tags=${tags}`, {
+        headers: { Authorization: "Bearer " + (token || lclToken) },
+      })
+      .then((res) => console.log(res));
   };
 
   const upVote = (el) => {
@@ -67,6 +77,9 @@ function QuoteContextProvider({ children }) {
     downVote,
     deleteDownVote,
     deleteUpVote,
+    deletedUpVote,
+    deletedDownVote,
+    getQuotesTag,
   };
   return (
     <QuoteContext.Provider value={values}>{children}</QuoteContext.Provider>
