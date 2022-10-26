@@ -1,0 +1,47 @@
+.welcome {
+    margin: 0;
+    padding: 0%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    background-image: url("../../helpers/images/fullpic.png");
+    background-size: contain;
+    /* background-repeat: no-repeat; */
+    /* flex-direction: column; */
+}
+
+.welcome-right{
+    border: 3px solid transparent;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    width: 35vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #ccc;
+    background-color: rgba(7, 0, 0, 0.817);
+    transition: 0.4s;
+}
+
+
+.welcome-right h1 {
+    font-size: 50px;
+}
+
+.welcome-right button {
+    background-color: #ccc;
+    color: black;
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    margin-bottom: 80px;
+    transition: 0.1s;
+}
+
+.welcome-right button:hover {
+    background-color: white;
+}

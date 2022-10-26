@@ -1,18 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./Welcome.css";
 
 function Welcome() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h1>Welcome</h1>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <button onClick={() => navigate("/login")}>Go to login</button>
+    <div className="welcome">
+      <div className="welcome-right">
+        <h1>Welcome</h1>
+        {/* <p>please go to login page</p> */}
+        <button onClick={() => navigate("/login")}>Go to login</button>
+      </div>
     </div>
   );
 }

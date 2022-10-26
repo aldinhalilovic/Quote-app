@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../service/LoginContext";
 import LocalStorage from "../../helpers/LocalStorage";
+import LoginCard from "../../components/LoginCard/LoginCard";
+import "./Login.css";
 function Login() {
   const [localUsername, setLocalUsername] = useState("");
   const [localPassword, setLocalPassword] = useState("");
@@ -27,7 +29,7 @@ function Login() {
   }, [token]);
 
   return (
-    <div>
+    <div className="login">
       <form onSubmit={(e) => (e.preventDefault(), getToken())}>
         <input
           type="text"
@@ -54,6 +56,8 @@ function Login() {
           <input type="checkbox" onClick={() => setRememberMe(true)} />
         )}
       </form>
+
+      <LoginCard />
     </div>
   );
 }

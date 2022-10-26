@@ -6,7 +6,12 @@ import Welcome from "./pages/Welcome/Welcome";
 
 function App() {
   return (
-    <div>
+    <div
+      style={{
+        margin: "0",
+        padding: "0",
+      }}
+    >
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
