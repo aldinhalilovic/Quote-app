@@ -1,13 +1,21 @@
-.container {
-    border: 2px solid #ccc;
-    width: 300px;
-    height: 100px;
-    overflow-y: scroll;
+.hero {
+    width: auto;
+    display: flex;
+    margin-top: -50px;
 }
 
-.hero {
-    /* width: 100vw; */
-    /* height: auto; */
+.scroll-tags {
+    width: 30vw;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quote-list{
+    /* background-color: blue; */
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;

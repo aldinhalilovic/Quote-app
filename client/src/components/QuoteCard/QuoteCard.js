@@ -1,7 +1,8 @@
-import React, { useContext, useState, version } from "react";
+import React, { useContext, useState } from "react";
 import { QuoteContext } from "../../service/QuoteContext";
 import LocalStorage from "../../helpers/LocalStorage";
 import "./QuoteCard.css";
+import { Text, Paper } from "@mantine/core";
 
 function QuoteCard({ el }) {
   const { upVote, downVote, deleteUpVote, deleteDownVote } =
@@ -16,37 +17,29 @@ function QuoteCard({ el }) {
   const upFunction = (el) => {
     if (localVote === "upvote" || el.givenVote === "upvote") {
       deleteUpVote(el);
-      // console.log(localVote, "deleteup");
     } else {
       upVote(el);
-      // console.log(localVote, "upvote");
     }
   };
 
   const downFunction = (el) => {
     if (localVote === "downvote" || el.givenVote === "downvote") {
       deleteDownVote(el);
-      // console.log(localVote, "deleteDownvote");
     } else {
       downVote(el);
-      // console.log(localVote, "downVote");
     }
   };
 
   return (
-    <div
-      style={{
-        width: "400px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "spaceBetween",
-        alignItems: "center",
-      }}
-    >
-      <h1>{el.content}</h1>
-      <p>{el.author}</p>
-      <p>{el.upvotesCount}</p>
-      <p>{el.downvotesCount}</p>
+    <div className="card-section">
+      <Paper shadow="md" radius="md" p="xl" className="paperclass">
+        <Text className="main-content">{el.content}</Text>
+        <Text className="main-author">{el.author}</Text>
+      </Paper>
+      {/* <h1>{el.content}</h1> */}
+      {/* <p>{el.author}</p> */}
+      {/* <p>{el.upvotesCount}</p> */}
+      {/* <p>{el.downvotesCount}</p> */}
       {/* <button
         className={
           localVote === "upvote" || el.givenVote === "upvote" ? "activeUp" : ""
@@ -65,9 +58,9 @@ function QuoteCard({ el }) {
       >
         Give down
       </button> */}
-      {el.givenVote}
-      <p>{votePercent.toFixed()}%</p>
-      <br></br>
+      {/* {el.givenVote} */}
+      {/* <p>{votePercent.toFixed()}%</p> */}
+      {/* <br></br> */}
     </div>
   );
 }

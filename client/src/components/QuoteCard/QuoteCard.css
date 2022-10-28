@@ -1,4 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
+
 .activeUp{
     background-color: lightblue;    
 }
 
+.card-section{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.paperclass {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+}
+
+.main-content {
+    font-family: 'Special Elite', cursive;
+    font-weight: 100;
+    font-size: 25px;
+    max-width: 600px;
+    width: 550px;
+    line-height: 1.4;
+    position: relative;
+    margin: 0;
+    padding: .5rem;
+    color: #3f3f5a;
+    text-align: center;
+}
+
+.main-content:before,
+.main-content:after {
+    position: absolute;
+    color: #ebe8dc;
+    font-size: 8rem;
+    width: 4rem;
+    height: 4rem;
+}
+
+.main-content:before {
+    content: '“';
+    left: -2rem;
+    top: -3rem;
+}
+
+.main-content:after {
+    content: '”';
+    right: -1.7rem;
+    bottom: -4.2rem;
+}
+
+.main-author {
+    font-family: 'Special Elite', cursive;
+    line-height: 3;
+    text-align: left;
+}

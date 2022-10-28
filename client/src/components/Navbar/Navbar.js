@@ -47,6 +47,7 @@ export function Navbar() {
       sx={{
         position: "sticky",
         top: 0,
+        zIndex: "2",
       }}
     >
       <Header height={60} px="md">
