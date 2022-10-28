@@ -4,3 +4,12 @@
     height: 100px;
     overflow-y: scroll;
 }
+
+.hero {
+    /* width: 100vw; */
+    /* height: auto; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

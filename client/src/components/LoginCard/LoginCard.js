@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { LoginContext } from "../../service/LoginContext";
+import LocalStorage from "../../helpers/LocalStorage";
+
 import {
   TextInput,
   PasswordInput,
@@ -13,38 +17,86 @@ import {
 } from "@mantine/core";
 
 function LoginCard() {
+  const {
+    setLoginPassword,
+    setLoginUsername,
+    getToken,
+    token,
+    rememberMe,
+    setRememberMe,
+  } = useContext(LoginContext);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (token && rememberMe) {
+      LocalStorage.setLocalStorage("token", token);
+      navigate("/homepage");
+    } else if (token) {
+      navigate("/homepage");
+    }
+  }, [token]);
+
+  const [localUsername, setLocalUsername] = useState("");
+  const [localPassword, setLocalPassword] = useState("");
+
   return (
     <div>
-      <Container size={420}>
-        <Title
-          align="center"
-          sx={(theme) => ({
-            fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-            fontWeight: 900,
-          })}
-        >
-          Welcome
-        </Title>
-        <Text color="white" size="sm" align="center" mt={5}>
-          Want to log in ?
-        </Text>
+      <form onSubmit={(e) => (e.preventDefault(), getToken())}>
+        <Container size={420} mb={90}>
+          <Title
+            align="center"
+            sx={(theme) => ({
+              fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+              fontWeight: 900,
+            })}
+          >
+            Welcome
+          </Title>
+          <Text color="white" size="sm" align="center" mt={5}>
+            Want to log in ?
+          </Text>
 
-        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <TextInput label="Username" placeholder="username" required />
-          <PasswordInput
-            label="Password"
-            placeholder="Your password"
-            required
-            mt="md"
-          />
-          <Group position="apart" mt="md">
-            <Checkbox label="Remember me" />
-          </Group>
-          <Button fullWidth mt="xl">
-            Sign in
-          </Button>
-        </Paper>
-      </Container>
+          <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+            <TextInput
+              label="Username"
+              placeholder="username"
+              required
+              value={localUsername}
+              onChange={(e) => setLocalUsername(e.target.value)}
+            />
+            <PasswordInput
+              label="Password"
+              placeholder="Your password"
+              required
+              mt="md"
+              onChange={(e) => setLocalPassword(e.target.value)}
+            />
+            <Group position="apart" mt="md">
+              {rememberMe ? (
+                <Checkbox
+                  label="Remember me"
+                  onClick={() => setRememberMe(false)}
+                />
+              ) : (
+                <Checkbox
+                  label="Remember me"
+                  onClick={() => setRememberMe(true)}
+                />
+              )}
+            </Group>
+            <Button
+              type="submit"
+              fullWidth
+              mt="xl"
+              onClick={() => (
+                setLoginUsername(localUsername), setLoginPassword(localPassword)
+              )}
+            >
+              Sign in
+            </Button>
+          </Paper>
+        </Container>
+      </form>
     </div>
   );
 }

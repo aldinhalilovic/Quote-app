@@ -12,6 +12,8 @@ function QuoteContextProvider({ children }) {
   const [quoteList, setQuoteList] = useState();
   const [deletedUpVote, setDeletedUpVote] = useState();
   const [deletedDownVote, setDeletedDownVote] = useState();
+  const [dataTags, setDataTags] = useState();
+  const [tags, setTags] = useState([]);
 
   const getQuotes = () => {
     axios
@@ -23,12 +25,20 @@ function QuoteContextProvider({ children }) {
       );
   };
 
+  const getTags = () => {
+    axios
+      .get("http://localhost:8000/tags", {
+        headers: { Authorization: "Bearer " + (token || lclToken) },
+      })
+      .then((res) => setDataTags(res.data));
+  };
+
   const getQuotesTag = (tags) => {
     axios
       .get(`http://localhost:8000/quotes?tags=${tags}`, {
         headers: { Authorization: "Bearer " + (token || lclToken) },
       })
-      .then((res) => console.log(res));
+      .then((res) => setQuoteList(res.data.quotes));
   };
 
   const upVote = (el) => {
@@ -80,6 +90,10 @@ function QuoteContextProvider({ children }) {
     deletedUpVote,
     deletedDownVote,
     getQuotesTag,
+    setTags,
+    tags,
+    getTags,
+    dataTags,
   };
   return (
     <QuoteContext.Provider value={values}>{children}</QuoteContext.Provider>
