@@ -1,32 +1,35 @@
 import React, { useContext, useState } from "react";
 import { QuoteContext } from "../../service/QuoteContext";
+import LocalStorage from "../../helpers/LocalStorage";
 import "./QuoteCard.css";
 
 function QuoteCard({ el }) {
   const { upVote, downVote, deleteUpVote, deleteDownVote } =
     useContext(QuoteContext);
 
-  const [currentUpVote, setCurrentUpVote] = useState(el.givenVote);
-  const [currentDownVote, setCurrentDownVote] = useState(el.givenVote);
   const [votePercent, setVotePercent] = useState(
     (100 / (el.upvotesCount + el.downvotesCount)) * el.upvotesCount
   );
 
+  const localVote = LocalStorage.getLocalStorage("currentvote");
+
   const upFunction = (el) => {
-    if (currentUpVote === "upvote") {
+    if (localVote === "upvote" || el.givenVote === "upvote") {
       deleteUpVote(el);
-      //   setCurrentUpVote("none");
-    } else if (currentUpVote === "none") {
+      console.log(localVote, "deleteup");
+    } else {
       upVote(el);
-      //   setCurrentUpVote("upvote");
+      console.log(localVote, "upvote");
     }
   };
 
   const downFunction = (el) => {
-    if (currentDownVote === "downvote") {
+    if (localVote === "downvote" || el.givenVote === "downvote") {
       deleteDownVote(el);
-    } else if (currentDownVote === "none") {
+      console.log(localVote, "deleteDownvote");
+    } else {
       downVote(el);
+      console.log(localVote, "downVote");
     }
   };
 
@@ -45,13 +48,13 @@ function QuoteCard({ el }) {
       <p>{el.upvotesCount}</p>
       <p>{el.downvotesCount}</p>
       <button
-        className={currentUpVote === "upvote" ? "activeUp" : ""}
+        className={localVote === "upvote" ? "activeUp" : ""}
         onClick={() => upFunction(el)}
       >
         Give up
       </button>
       <button
-        className={currentDownVote === "downvote" ? "activeUp" : ""}
+        className={localVote === "downvote" ? "activeUp" : ""}
         onClick={() => downFunction(el)}
       >
         Give down
