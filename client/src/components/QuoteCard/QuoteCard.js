@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, version } from "react";
 import { QuoteContext } from "../../service/QuoteContext";
 import LocalStorage from "../../helpers/LocalStorage";
 import "./QuoteCard.css";
@@ -11,25 +11,25 @@ function QuoteCard({ el }) {
     (100 / (el.upvotesCount + el.downvotesCount)) * el.upvotesCount
   );
 
-  const localVote = LocalStorage.getLocalStorage("currentvote");
+  const localVote = LocalStorage.getLocalStorage(`${el.id} currentvote`);
 
   const upFunction = (el) => {
     if (localVote === "upvote" || el.givenVote === "upvote") {
       deleteUpVote(el);
-      console.log(localVote, "deleteup");
+      // console.log(localVote, "deleteup");
     } else {
       upVote(el);
-      console.log(localVote, "upvote");
+      // console.log(localVote, "upvote");
     }
   };
 
   const downFunction = (el) => {
     if (localVote === "downvote" || el.givenVote === "downvote") {
       deleteDownVote(el);
-      console.log(localVote, "deleteDownvote");
+      // console.log(localVote, "deleteDownvote");
     } else {
       downVote(el);
-      console.log(localVote, "downVote");
+      // console.log(localVote, "downVote");
     }
   };
 
@@ -47,18 +47,24 @@ function QuoteCard({ el }) {
       <p>{el.author}</p>
       <p>{el.upvotesCount}</p>
       <p>{el.downvotesCount}</p>
-      <button
-        className={localVote === "upvote" ? "activeUp" : ""}
+      {/* <button
+        className={
+          localVote === "upvote" || el.givenVote === "upvote" ? "activeUp" : ""
+        }
         onClick={() => upFunction(el)}
       >
         Give up
-      </button>
-      <button
-        className={localVote === "downvote" ? "activeUp" : ""}
+      </button> */}
+      {/* <button
+        className={
+          localVote === "downvote" || el.givenVote === "downvote"
+            ? "activeUp"
+            : ""
+        }
         onClick={() => downFunction(el)}
       >
         Give down
-      </button>
+      </button> */}
       {el.givenVote}
       <p>{votePercent.toFixed()}%</p>
       <br></br>

@@ -49,7 +49,10 @@ function QuoteContextProvider({ children }) {
         (res) => (
           console.log(res.data.givenVote),
           setCurrentVote(res.data.givenVote),
-          LocalStorage.setLocalStorage("currentvote", res.data.givenVote)
+          LocalStorage.setLocalStorage(
+            `${el.id} currentvote`,
+            res.data.givenVote
+          )
         )
       );
   };
@@ -62,7 +65,10 @@ function QuoteContextProvider({ children }) {
         (res) => (
           // console.log(res.data.givenVote),
           setCurrentVote(res.data.givenVote),
-          LocalStorage.setLocalStorage("currentvote", res.data.givenVote)
+          LocalStorage.setLocalStorage(
+            `${el.id} currentvote`,
+            res.data.givenVote
+          )
         )
       );
   };
@@ -76,7 +82,10 @@ function QuoteContextProvider({ children }) {
         (res) => (
           // console.log(res.data.givenVote),
           setCurrentVote(res.data.givenVote),
-          LocalStorage.setLocalStorage("currentvote", res.data.givenVote)
+          LocalStorage.setLocalStorage(
+            `${el.id} currentvote`,
+            res.data.givenVote
+          )
         )
       );
   };
@@ -90,7 +99,10 @@ function QuoteContextProvider({ children }) {
         (res) => (
           console.log(res.data.givenVote),
           setCurrentVote(res.data.givenVote),
-          LocalStorage.setLocalStorage("currentvote", res.data.givenVote)
+          LocalStorage.setLocalStorage(
+            `${el.id} currentvote`,
+            res.data.givenVote
+          )
         )
       );
   };
