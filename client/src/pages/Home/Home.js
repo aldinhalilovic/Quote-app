@@ -6,7 +6,15 @@ import { QuoteContext } from "../../service/QuoteContext";
 import QuoteCard from "../../components/QuoteCard/QuoteCard";
 import "./Home.css";
 import { Navbar } from "../../components/Navbar/Navbar";
-import { ActionIcon, Button, Collapse, ScrollArea } from "@mantine/core";
+import {
+  ActionIcon,
+  Button,
+  Collapse,
+  ScrollArea,
+  Modal,
+  Group,
+} from "@mantine/core";
+import AddQuoteModal from "../../components/AddQuoteModal/AddQuoteModal";
 
 function Home() {
   const {
@@ -56,6 +64,8 @@ function Home() {
       }
     });
 
+  // const [opened, setOpened] = useState(false);
+
   return (
     <div
       style={{
@@ -64,7 +74,8 @@ function Home() {
     >
       <Navbar />
       <div className="hero">
-        <Button
+        <AddQuoteModal />
+        {/* <Button
           leftIcon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -85,13 +96,11 @@ function Home() {
           }
           variant={"outline"}
           type="submit"
-          onClick={() => console.log("okinuo")}
+          onSubmit={() => console.log("okinuo")}
         >
           {/* <ActionIcon > */}
-
-          {/* </ActionIcon> */}
-        </Button>
-
+        {/* </ActionIcon> */}
+        {/* </Button> */}
         {/* <div className="scroll-tags">
           <Button onClick={() => setOpened((o) => !o)}>Pick Tags</Button>
           <Collapse in={opened}>
