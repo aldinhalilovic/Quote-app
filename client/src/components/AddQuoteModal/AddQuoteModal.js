@@ -15,7 +15,7 @@ function AddQuoteModal() {
 
   const [axiosAuthor, setAxiosAuthor] = useState();
   const [axiosContent, setAxiosContent] = useState();
-  const [axiosTags, setAxiosTags] = useState([]);
+  const [axiosTags, setAxiosTags] = useState();
 
   const [trigger, setTrigger] = useState(false);
 
@@ -53,7 +53,7 @@ function AddQuoteModal() {
             style={{
               display: "flex",
             }}
-            onSubmit={() => (addQuote(), setOpened(false))}
+            onSubmit={(e) => (e.preventDefault(), addQuote(), setOpened(false))}
           >
             <input
               type={"text"}
@@ -114,7 +114,7 @@ function AddQuoteModal() {
                 onClick={() => (
                   setAxiosContent(contentValue),
                   setAxiosAuthor(authorValue),
-                  setAxiosTags((prev) => [...prev, tagsValue])
+                  setAxiosTags(tagsValue.split(","))
                 )}
               >
                 Add
