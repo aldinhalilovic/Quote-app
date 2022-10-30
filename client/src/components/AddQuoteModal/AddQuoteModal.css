@@ -1,0 +1,38 @@
+.inputstyle {
+    height: 200px;
+    width: 400px;
+    font-size: large;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+.inputstyle:focus::placeholder{
+    color: transparent;
+}
+
+.inputstyle::placeholder {
+    text-align: center;
+}
+
+
+.inputposition {
+    margin-left: 40px;
+    height: 30px;
+    border: 1px solid #ccc;
+    width: 280px;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.inputposition::placeholder {
+    text-align: center;
+}
+
+.marginS{
+    margin-top: 20px;
+}
+
+.marginL{
+    margin-top: 90px;
+}
+

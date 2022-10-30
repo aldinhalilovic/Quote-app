@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import LocalStorage from "../../helpers/LocalStorage";
 import { LoginContext } from "../../service/LoginContext";
+import "./AddQuoteModal.css";
 
 function AddQuoteModal() {
   const localToken = LocalStorage.getLocalStorage("token");
@@ -12,12 +13,9 @@ function AddQuoteModal() {
   const [contentValue, setContentValue] = useState("");
   const [authorValue, setAuthorValue] = useState("");
   const [tagsValue, setTagsValue] = useState("");
-
   const [axiosAuthor, setAxiosAuthor] = useState();
   const [axiosContent, setAxiosContent] = useState();
   const [axiosTags, setAxiosTags] = useState();
-
-  const [trigger, setTrigger] = useState(false);
 
   const addQuote = () => {
     axios
@@ -35,10 +33,6 @@ function AddQuoteModal() {
       .then((res) => console.log(res));
   };
 
-  //   useEffect(() => {
-  //     addQuote();
-  //   }, []);
-
   return (
     <>
       <Modal
@@ -53,22 +47,15 @@ function AddQuoteModal() {
             style={{
               display: "flex",
             }}
-            onSubmit={(e) => (e.preventDefault(), addQuote(), setOpened(false))}
+            onSubmit={addQuote}
           >
             <input
               type={"text"}
               placeholder="Add content"
               required
+              className="inputstyle"
               value={contentValue}
               onChange={(e) => setContentValue(e.target.value)}
-              style={{
-                // display: "flex",
-                // justifyContent: "center",
-                // alignItems: "center",
-                textAlign: "center",
-                height: "200px",
-                width: "400px",
-              }}
             />
             <div
               style={{
@@ -82,12 +69,7 @@ function AddQuoteModal() {
                 required
                 value={authorValue}
                 onChange={(e) => setAuthorValue(e.target.value)}
-                style={{
-                  marginLeft: "40px",
-                  height: "30px",
-                  width: "280px",
-                  textAlign: "center",
-                }}
+                className="inputposition"
               />
               <input
                 type={"text"}
@@ -95,21 +77,10 @@ function AddQuoteModal() {
                 required
                 value={tagsValue}
                 onChange={(e) => setTagsValue(e.target.value)}
-                style={{
-                  marginTop: "20px",
-                  marginLeft: "40px",
-                  height: "30px",
-                  width: "280px",
-                  textAlign: "center",
-                }}
+                className="inputposition marginS"
               />
               <button
-                style={{
-                  marginTop: " 20px",
-                  marginLeft: "40px",
-                  width: "280px",
-                  height: "20px",
-                }}
+                className="inputposition marginL"
                 type="submit"
                 onClick={() => (
                   setAxiosContent(contentValue),
@@ -124,11 +95,13 @@ function AddQuoteModal() {
         </div>
       </Modal>
 
-      <Group position="center">
-        <Button onClick={() => setOpened(true)} variant={"transparent"}>
-          Open Modal
-        </Button>
-      </Group>
+      <Button
+        onClick={() => setOpened(true)}
+        variant={"transparent"}
+        color="gray"
+      >
+        Add Quote
+      </Button>
     </>
   );
 }

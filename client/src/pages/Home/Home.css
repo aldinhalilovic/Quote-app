@@ -1,7 +1,8 @@
 .hero {
+    min-height: 100vh;
     width: auto;
     display: flex;
-    margin-top: -50px;
+    /* margin-top: -50px; */
 }
 
 .scroll-tags {
