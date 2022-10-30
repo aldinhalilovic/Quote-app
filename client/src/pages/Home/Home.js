@@ -30,10 +30,6 @@ function Home() {
   const { token, setToken, rememberMe } = useContext(LoginContext);
   const navigate = useNavigate();
 
-  const logout = () => {
-    setToken(null);
-    LocalStorage.removeLocalStorage("token");
-  };
   useEffect(() => {
     if (token === null && !rememberMe) {
       let tkn = LocalStorage.getLocalStorage("token");
@@ -55,14 +51,14 @@ function Home() {
     getQuotesTag(tags);
   }, [tags]);
 
-  const helpFunction = (e) =>
-    setTags((prev) => {
-      if (prev.find((el) => el === e.target.value)) {
-        return prev.filter((el) => el !== e.target.value);
-      } else {
-        return [...prev, e.target.value];
-      }
-    });
+  // const helpFunction = (e) =>
+  //   setTags((prev) => {
+  //     if (prev.find((el) => el === e.target.value)) {
+  //       return prev.filter((el) => el !== e.target.value);
+  //     } else {
+  //       return [...prev, e.target.value];
+  //     }
+  //   });
 
   // const [opened, setOpened] = useState(false);
 
@@ -75,31 +71,6 @@ function Home() {
       <Navbar />
 
       <div className="hero">
-        {/* <div className="scroll-tags">     da se ubaci u drawer
-          <Button onClick={() => setOpened((o) => !o)}>Pick Tags</Button>
-          <Collapse in={opened}>
-            <ScrollArea
-              style={{
-                height: 150,
-                width: 250,
-                border: "2px solid black",
-                borderRadius: "10px",
-                padding: "10px",
-              }}
-            >
-              {dataTags?.map((el) => (
-                <div key={el}>
-                  <input
-                    type="checkbox"
-                    value={el}
-                    onClick={(e) => helpFunction(e)}
-                  />{" "}
-                  {el} <br />
-                </div>
-              ))}
-            </ScrollArea>
-          </Collapse>
-        </div> */}
         <div className="quote-list">
           {quoteList?.map((el) => (
             <div key={el.id}>
