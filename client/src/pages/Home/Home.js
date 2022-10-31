@@ -18,6 +18,7 @@ function Home() {
     totalPages,
     currentPage,
     setCurrentPage,
+    sortBy,
   } = useContext(QuoteContext);
   const { token, setToken, rememberMe } = useContext(LoginContext);
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ function Home() {
     getTags();
     getTotalPages();
     console.log(currentPage);
-  }, [tags, currentPage]);
+  }, [tags, currentPage, sortBy]);
 
   const [activePage, setPage] = useState(1);
   function handleChange(event, value) {
@@ -63,7 +64,7 @@ function Home() {
             </div>
           ))}
         </div>
-        <div>
+        {/* <div>
           <Pagination
             page={currentPage}
             onChange={handleChange}
@@ -73,7 +74,7 @@ function Home() {
             mt={40}
             mb={30}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

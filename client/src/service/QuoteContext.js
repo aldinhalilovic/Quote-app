@@ -15,11 +15,12 @@ function QuoteContextProvider({ children }) {
   const [currentVote, setCurrentVote] = useState("");
   const [totalPages, setTotalPages] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState([]);
 
   const getQuotes = (tags) => {
     axios
       .get(
-        `http://localhost:8000/quotes?tags=${tags}&pageSize=5&page=${currentPage}`,
+        `http://localhost:8000/quotes?tags=${tags}&pageSize=10&page=${currentPage}&sortBy=${sortBy}`,
         {
           headers: { Authorization: "Bearer " + (token || lclToken) },
         }
@@ -127,6 +128,8 @@ function QuoteContextProvider({ children }) {
     totalPages,
     currentPage,
     setCurrentPage,
+    sortBy,
+    setSortBy,
   };
   return (
     <QuoteContext.Provider value={values}>{children}</QuoteContext.Provider>

@@ -9,20 +9,30 @@ import "./Navbar.css";
 function Navbar() {
   const [opened, setOpened] = useState(false);
   const [collapse, setCollapse] = useState(false);
+  const [sortCollapse, setSortCollapes] = useState(false);
   const { setToken } = useContext(LoginContext);
   const logout = () => {
     setToken(null);
     LocalStorage.removeAllLocalStorage();
   };
 
-  const { setTags, dataTags } = useContext(QuoteContext);
+  const { setTags, dataTags, setSortby } = useContext(QuoteContext);
 
-  const helpFunction = (e) =>
+  const helpTagFunction = (e) =>
     setTags((prev) => {
       if (prev.find((el) => el === e.target.value)) {
         return prev.filter((el) => el !== e.target.value);
       } else {
         return [...prev, e.target.value];
+      }
+    });
+
+  const helpSortFunction = (e) =>
+    setSortby((prev) => {
+      if (prev.find((el) => el === e.target.value)) {
+        return prev.filter((el) => el !== e.target.value);
+      } else {
+        return e.target.value;
       }
     });
 
@@ -61,12 +71,56 @@ function Navbar() {
                       <input
                         type="checkbox"
                         value={el}
-                        onClick={(e) => helpFunction(e)}
+                        onClick={(e) => helpTagFunction(e)}
                       />
                       {el} <br />
                     </div>
                   ))}
                 </ScrollArea>
+              </Collapse>
+              <Button
+                onClick={() => setSortCollapes((o) => !o)}
+                variant="transparent"
+                color="gray"
+              >
+                Sort by
+              </Button>
+              <Collapse in={sortCollapse}>
+                <div
+
+                // className="scrollarea"
+                >
+                  <input
+                    type="checkbox"
+                    value="createdAt"
+                    onClick={(e) => helpSortFunction(e)}
+                    style={{
+                      fontSize: "14px",
+                      marginTop: "15px",
+                    }}
+                  />
+                  createdAt <br />
+                  <input
+                    type="checkbox"
+                    value="author"
+                    onClick={(e) => helpSortFunction(e)}
+                    style={{
+                      fontSize: "14px",
+                      marginTop: "15px",
+                    }}
+                  />
+                  author <br />
+                  <input
+                    type="checkbox"
+                    value="upvotesCount"
+                    onClick={(e) => helpSortFunction(e)}
+                    style={{
+                      fontSize: "14px",
+                      marginTop: "15px",
+                    }}
+                  />
+                  upvotesCount <br />
+                </div>
               </Collapse>
             </Button.Group>
           </div>
