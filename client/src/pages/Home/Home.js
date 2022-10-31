@@ -17,8 +17,9 @@ function Home() {
     getTotalPages,
     totalPages,
     currentPage,
-    setCurrentPage,
     sortBy,
+    activePage,
+    setPage,
   } = useContext(QuoteContext);
   const { token, setToken, rememberMe } = useContext(LoginContext);
   const navigate = useNavigate();
@@ -40,14 +41,7 @@ function Home() {
     getTags();
     getTotalPages();
     console.log(currentPage);
-  }, [tags, currentPage, sortBy]);
-
-  const [activePage, setPage] = useState(1);
-  function handleChange(event, value) {
-    setCurrentPage(value);
-    // setCurrentPage(value);
-    // window.scroll(0, 0);
-  }
+  }, [tags, activePage, sortBy]);
 
   return (
     <div
@@ -64,17 +58,17 @@ function Home() {
             </div>
           ))}
         </div>
-        {/* <div>
-          <Pagination
-            page={currentPage}
-            onChange={handleChange}
-            total={Math.ceil(totalPages / 5)}
-            color="gray"
-            radius="lg"
-            mt={40}
-            mb={30}
-          />
-        </div> */}
+        {/* <div> */}
+        <Pagination
+          page={activePage}
+          onChange={setPage}
+          total={Math.ceil(totalPages / 5)}
+          color="gray"
+          radius="lg"
+          mt={40}
+          mb={30}
+        />
+        {/* </div> */}
       </div>
     </div>
   );

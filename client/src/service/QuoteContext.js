@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
 import LocalStorage from "../helpers/LocalStorage";
 import { LoginContext } from "./LoginContext";
+import { Pagination } from "@mantine/core";
 
 const QuoteContext = createContext();
 
@@ -16,11 +17,12 @@ function QuoteContextProvider({ children }) {
   const [totalPages, setTotalPages] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState([]);
+  const [activePage, setPage] = useState(1);
 
   const getQuotes = (tags) => {
     axios
       .get(
-        `http://localhost:8000/quotes?tags=${tags}&pageSize=10&page=${currentPage}&sortBy=${sortBy}`,
+        `http://localhost:8000/quotes?tags=${tags}&pageSize=5&page=${activePage}&sortBy=${sortBy}`,
         {
           headers: { Authorization: "Bearer " + (token || lclToken) },
         }
@@ -130,6 +132,8 @@ function QuoteContextProvider({ children }) {
     setCurrentPage,
     sortBy,
     setSortBy,
+    activePage,
+    setPage,
   };
   return (
     <QuoteContext.Provider value={values}>{children}</QuoteContext.Provider>

@@ -16,7 +16,7 @@ function Navbar() {
     LocalStorage.removeAllLocalStorage();
   };
 
-  const { setTags, dataTags, setSortby } = useContext(QuoteContext);
+  const { setTags, dataTags, setSortBy } = useContext(QuoteContext);
 
   const helpTagFunction = (e) =>
     setTags((prev) => {
@@ -28,11 +28,11 @@ function Navbar() {
     });
 
   const helpSortFunction = (e) =>
-    setSortby((prev) => {
+    setSortBy((prev) => {
       if (prev.find((el) => el === e.target.value)) {
         return prev.filter((el) => el !== e.target.value);
       } else {
-        return e.target.value;
+        return [e.target.value];
       }
     });
 
@@ -93,7 +93,9 @@ function Navbar() {
                   <input
                     type="checkbox"
                     value="createdAt"
-                    onClick={(e) => helpSortFunction(e)}
+                    onClick={(e) => (
+                      helpSortFunction(e), console.log("okiunuiaosdjlsiajdk")
+                    )}
                     style={{
                       fontSize: "14px",
                       marginTop: "15px",
