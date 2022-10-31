@@ -1,31 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../service/LoginContext";
-import LocalStorage from "../../helpers/LocalStorage";
 import { QuoteContext } from "../../service/QuoteContext";
+import LocalStorage from "../../helpers/LocalStorage";
 import QuoteCard from "../../components/QuoteCard/QuoteCard";
-import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
-import {
-  ActionIcon,
-  Button,
-  Collapse,
-  ScrollArea,
-  Modal,
-  Group,
-  Drawer,
-} from "@mantine/core";
-import AddQuoteModal from "../../components/AddQuoteModal/AddQuoteModal";
+import { Pagination } from "@mantine/core";
+import "./Home.css";
 
 function Home() {
   const {
     getQuotes,
     quoteList,
-    getQuotesTag,
-    setTags,
     tags,
     getTags,
-    dataTags,
+    getTotalPages,
+    totalPages,
+    currentPage,
+    setCurrentPage,
   } = useContext(QuoteContext);
   const { token, setToken, rememberMe } = useContext(LoginContext);
   const navigate = useNavigate();
@@ -43,24 +35,18 @@ function Home() {
   }, [token]);
 
   useEffect(() => {
-    getQuotes();
+    getQuotes(tags);
     getTags();
-  }, []);
+    getTotalPages();
+    console.log(currentPage);
+  }, [tags, currentPage]);
 
-  useEffect(() => {
-    getQuotesTag(tags);
-  }, [tags]);
-
-  // const helpFunction = (e) =>
-  //   setTags((prev) => {
-  //     if (prev.find((el) => el === e.target.value)) {
-  //       return prev.filter((el) => el !== e.target.value);
-  //     } else {
-  //       return [...prev, e.target.value];
-  //     }
-  //   });
-
-  // const [opened, setOpened] = useState(false);
+  const [activePage, setPage] = useState(1);
+  function handleChange(event, value) {
+    setCurrentPage(value);
+    // setCurrentPage(value);
+    // window.scroll(0, 0);
+  }
 
   return (
     <div
@@ -69,7 +55,6 @@ function Home() {
       }}
     >
       <Navbar />
-
       <div className="hero">
         <div className="quote-list">
           {quoteList?.map((el) => (
@@ -77,6 +62,17 @@ function Home() {
               <QuoteCard el={el} />
             </div>
           ))}
+        </div>
+        <div>
+          <Pagination
+            page={currentPage}
+            onChange={handleChange}
+            total={Math.ceil(totalPages / 5)}
+            color="gray"
+            radius="lg"
+            mt={40}
+            mb={30}
+          />
         </div>
       </div>
     </div>

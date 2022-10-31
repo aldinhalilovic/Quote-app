@@ -1,7 +1,10 @@
 .hero {
     min-height: 100vh;
-    width: auto;
+    max-width: 100%;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     /* margin-top: -50px; */
 }
 
@@ -16,7 +19,7 @@
 
 .quote-list{
     /* background-color: blue; */
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;

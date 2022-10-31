@@ -9,16 +9,21 @@ function QuoteContextProvider({ children }) {
   const localToken = LocalStorage.getLocalStorage("token");
   const [lclToken, setLclToken] = useState(localToken);
   const { token } = useContext(LoginContext);
-  const [quoteList, setQuoteList] = useState();
+  const [quoteList, setQuoteList] = useState([]);
   const [dataTags, setDataTags] = useState();
   const [tags, setTags] = useState([]);
   const [currentVote, setCurrentVote] = useState("");
+  const [totalPages, setTotalPages] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const getQuotes = () => {
+  const getQuotes = (tags) => {
     axios
-      .get("http://localhost:8000/quotes", {
-        headers: { Authorization: "Bearer " + (token || lclToken) },
-      })
+      .get(
+        `http://localhost:8000/quotes?tags=${tags}&pageSize=5&page=${currentPage}`,
+        {
+          headers: { Authorization: "Bearer " + (token || lclToken) },
+        }
+      )
       .then(
         (res) => (console.log(res.data.quotes), setQuoteList(res.data.quotes))
       );
@@ -30,14 +35,6 @@ function QuoteContextProvider({ children }) {
         headers: { Authorization: "Bearer " + (token || lclToken) },
       })
       .then((res) => setDataTags(res.data));
-  };
-
-  const getQuotesTag = (tags) => {
-    axios
-      .get(`http://localhost:8000/quotes?tags=${tags}`, {
-        headers: { Authorization: "Bearer " + (token || lclToken) },
-      })
-      .then((res) => setQuoteList(res.data.quotes));
   };
 
   const upVote = (el) => {
@@ -107,6 +104,14 @@ function QuoteContextProvider({ children }) {
       );
   };
 
+  const getTotalPages = () => {
+    axios
+      .get(`http://localhost:8000/quotes`, {
+        headers: { Authorization: "Bearer " + (token || lclToken) },
+      })
+      .then((res) => setTotalPages(res.data.quotes.length));
+  };
+
   const values = {
     getQuotes,
     quoteList,
@@ -114,11 +119,14 @@ function QuoteContextProvider({ children }) {
     downVote,
     deleteDownVote,
     deleteUpVote,
-    getQuotesTag,
     setTags,
     tags,
     getTags,
     dataTags,
+    getTotalPages,
+    totalPages,
+    currentPage,
+    setCurrentPage,
   };
   return (
     <QuoteContext.Provider value={values}>{children}</QuoteContext.Provider>
