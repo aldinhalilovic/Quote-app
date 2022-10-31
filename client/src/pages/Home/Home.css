@@ -1,11 +1,11 @@
 .hero {
     min-height: 100vh;
+    min-width: 100%;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* margin-top: -50px; */
 }
 
 .scroll-tags {
@@ -18,10 +18,26 @@
 }
 
 .quote-list{
-    /* background-color: blue; */
+    background-color: #ccc;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.buttonSorting{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    text-transform:uppercase;
+    padding: 5px;
+    position: sticky;
+    top: 600px;
+    left: 1430px;
 }

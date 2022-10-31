@@ -1,13 +1,13 @@
-import { Button, Group, Modal } from "@mantine/core";
+import React, { useContext, useState } from "react";
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
 import LocalStorage from "../../helpers/LocalStorage";
 import { LoginContext } from "../../service/LoginContext";
+import { Button, Modal } from "@mantine/core";
 import "./AddQuoteModal.css";
 
 function AddQuoteModal() {
   const localToken = LocalStorage.getLocalStorage("token");
-  const [lclToken, setLclToken] = useState(localToken);
+  const [lclToken] = useState(localToken);
   const { token } = useContext(LoginContext);
   const [opened, setOpened] = useState(false);
   const [contentValue, setContentValue] = useState("");

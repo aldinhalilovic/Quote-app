@@ -7,7 +7,6 @@ import {
   TextInput,
   PasswordInput,
   Checkbox,
-  Anchor,
   Paper,
   Title,
   Text,

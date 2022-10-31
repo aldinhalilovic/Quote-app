@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
+import { QuoteContext } from "../../service/QuoteContext";
 import { LoginContext } from "../../service/LoginContext";
 import LocalStorage from "../../helpers/LocalStorage";
-import { Button, Collapse, Drawer, ScrollArea } from "@mantine/core";
 import AddQuoteModal from "../AddQuoteModal/AddQuoteModal";
-import { QuoteContext } from "../../service/QuoteContext";
+import { Button, Collapse, Drawer, ScrollArea } from "@mantine/core";
 import "./Navbar.css";
 
 function Navbar() {
@@ -54,20 +54,14 @@ function Navbar() {
         >
           <div className="drawer">
             <Button.Group orientation="vertical">
-              <AddQuoteModal />{" "}
+              <AddQuoteModal />
               <Button onClick={() => setCollapse((o) => !o)} color="gray">
                 Pick Tags
               </Button>
               <Collapse in={collapse}>
                 <ScrollArea className="scrollarea">
                   {dataTags?.map((el) => (
-                    <div
-                      key={el}
-                      style={{
-                        fontSize: "14px",
-                        marginTop: "15px",
-                      }}
-                    >
+                    <div key={el} className="inputsize">
                       <input
                         type="checkbox"
                         value={el}
@@ -87,39 +81,31 @@ function Navbar() {
               </Button>
               <Collapse in={sortCollapse}>
                 <div
-
-                // className="scrollarea"
+                  style={{
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "15px",
+                  }}
                 >
                   <input
                     type="checkbox"
                     value="createdAt"
-                    onClick={(e) => (
-                      helpSortFunction(e), console.log("okiunuiaosdjlsiajdk")
-                    )}
-                    style={{
-                      fontSize: "14px",
-                      marginTop: "15px",
-                    }}
+                    className="inputsize"
+                    onClick={(e) => helpSortFunction(e)}
                   />
                   createdAt <br />
                   <input
                     type="checkbox"
                     value="author"
+                    className="inputsize"
                     onClick={(e) => helpSortFunction(e)}
-                    style={{
-                      fontSize: "14px",
-                      marginTop: "15px",
-                    }}
                   />
                   author <br />
                   <input
                     type="checkbox"
                     value="upvotesCount"
+                    className="inputsize"
                     onClick={(e) => helpSortFunction(e)}
-                    style={{
-                      fontSize: "14px",
-                      marginTop: "15px",
-                    }}
                   />
                   upvotesCount <br />
                 </div>
@@ -132,7 +118,7 @@ function Navbar() {
             </Button>
           </div>
         </Drawer>
-        <button className=" flex button" onClick={() => setOpened(true)}>
+        <button className="flex button" onClick={() => setOpened(true)}>
           <i className="gg-menu"></i>
         </button>
       </div>

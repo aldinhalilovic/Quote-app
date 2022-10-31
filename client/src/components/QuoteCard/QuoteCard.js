@@ -36,19 +36,17 @@ function QuoteCard({ el }) {
         <Text className="main-content">{el.content}</Text>
         <Text className="main-author">{el.author}</Text>
       </Paper>
-      {/* <h1>{el.content}</h1> */}
-      {/* <p>{el.author}</p> */}
-      {/* <p>{el.upvotesCount}</p> */}
-      {/* <p>{el.downvotesCount}</p> */}
-      {/* <button
+      {/* <p>{el.upvotesCount}</p>
+      <p>{el.downvotesCount}</p>
+      <button
         className={
           localVote === "upvote" || el.givenVote === "upvote" ? "activeUp" : ""
         }
         onClick={() => upFunction(el)}
       >
         Give up
-      </button> */}
-      {/* <button
+      </button>
+      <button
         className={
           localVote === "downvote" || el.givenVote === "downvote"
             ? "activeUp"
@@ -57,10 +55,10 @@ function QuoteCard({ el }) {
         onClick={() => downFunction(el)}
       >
         Give down
-      </button> */}
-      {/* {el.givenVote} */}
-      {/* <p>{votePercent.toFixed()}%</p> */}
-      {/* <br></br> */}
+      </button>
+      {el.givenVote}
+      <p>{votePercent.toFixed()}%</p>
+      <br></br> */}
     </div>
   );
 }

@@ -8,7 +8,6 @@ function LoginContextProvider({ children }) {
   const [loginPassword, setLoginPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [token, setToken] = useState(null);
-  // const [quotes, setQuotes] = useState(null);
 
   const getToken = () => {
     axios

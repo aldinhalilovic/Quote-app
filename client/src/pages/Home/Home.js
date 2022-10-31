@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../service/LoginContext";
 import { QuoteContext } from "../../service/QuoteContext";
@@ -20,9 +20,19 @@ function Home() {
     sortBy,
     activePage,
     setPage,
+    setDirection,
+    direction,
   } = useContext(QuoteContext);
   const { token, setToken, rememberMe } = useContext(LoginContext);
   const navigate = useNavigate();
+
+  const sorting = () => {
+    if (direction === "desc") {
+      setDirection("asc");
+    } else {
+      setDirection("desc");
+    }
+  };
 
   useEffect(() => {
     if (token === null && !rememberMe) {
@@ -40,16 +50,20 @@ function Home() {
     getQuotes(tags);
     getTags();
     getTotalPages();
-    console.log(currentPage);
-  }, [tags, activePage, sortBy]);
+  }, [tags, activePage, sortBy, direction]);
 
   return (
     <div
       style={{
         backgroundColor: "#ccc",
+        scrollBehavior: "smooth",
+        width: "100%",
       }}
     >
       <Navbar />
+      <button onClick={sorting} className="buttonSorting">
+        {direction === "desc" ? "asc" : "desc"}
+      </button>
       <div className="hero">
         <div className="quote-list">
           {quoteList?.map((el) => (
@@ -58,17 +72,22 @@ function Home() {
             </div>
           ))}
         </div>
-        {/* <div> */}
         <Pagination
           page={activePage}
           onChange={setPage}
+          onClick={() =>
+            window.scroll({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            })
+          }
           total={Math.ceil(totalPages / 5)}
           color="gray"
           radius="lg"
           mt={40}
           mb={30}
         />
-        {/* </div> */}
       </div>
     </div>
   );

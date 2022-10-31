@@ -1,18 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../service/LoginContext";
 import LocalStorage from "../../helpers/LocalStorage";
 import LoginCard from "../../components/LoginCard/LoginCard";
 import "./Login.css";
 function Login() {
-  const {
-    setLoginPassword,
-    setLoginUsername,
-    getToken,
-    token,
-    rememberMe,
-    setRememberMe,
-  } = useContext(LoginContext);
+  const { token, rememberMe } = useContext(LoginContext);
 
   const navigate = useNavigate();
 

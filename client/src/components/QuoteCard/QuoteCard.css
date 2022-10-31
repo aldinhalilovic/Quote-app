@@ -5,7 +5,7 @@
 }
 
 .card-section{
-    width: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -16,7 +16,7 @@
 .paperclass {
     margin-top: 10px;
     margin-bottom: 20px;
-    width: 600px;
+    min-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,12 +28,12 @@
     font-family: 'Special Elite', cursive;
     font-weight: 100;
     font-size: 25px;
-    max-width: 600px;
-    width: 550px;
+    max-width: 40vw;
+    min-width: 40vw;
     line-height: 1.4;
     position: relative;
     margin: 0;
-    padding: .5rem;
+    padding: 1rem;
     color: #3f3f5a;
     text-align: center;
 }

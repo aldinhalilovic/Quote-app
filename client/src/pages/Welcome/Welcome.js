@@ -9,7 +9,6 @@ function Welcome() {
     <div className="welcome">
       <div className="welcome-right">
         <h1>Welcome</h1>
-        {/* <p>please go to login page</p> */}
         <button onClick={() => navigate("/login")}>Go to login</button>
       </div>
     </div>

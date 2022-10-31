@@ -8,8 +8,6 @@
     align-items: center;
     background-image: url("../../helpers/images/fullpic.png");
     background-size: contain;
-    /* background-repeat: no-repeat; */
-    /* flex-direction: column; */
 }
 
 .welcome-right{
@@ -26,8 +24,6 @@
     background-color: rgba(7, 0, 0, 0.817);
     transition: 0.4s;
 }
-
-
 
 .welcome-right h1 {
     font-size: 50px;
