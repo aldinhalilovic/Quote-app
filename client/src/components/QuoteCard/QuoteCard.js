@@ -1,8 +1,14 @@
 import React, { useContext, useState } from "react";
 import { QuoteContext } from "../../service/QuoteContext";
-import LocalStorage from "../../helpers/LocalStorage";
 import "./QuoteCard.css";
 import { Text, Paper } from "@mantine/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCoffee,
+  faSolid,
+  faCaretUp,
+  faCaretDown,
+} from "@fortawesome/free-solid-svg-icons";
 
 function QuoteCard({ el }) {
   const { upVote, downVote, deleteUpVote, deleteDownVote } =
@@ -12,10 +18,9 @@ function QuoteCard({ el }) {
     (100 / (el.upvotesCount + el.downvotesCount)) * el.upvotesCount
   );
 
-  const localVote = LocalStorage.getLocalStorage(`${el.id} currentvote`);
-
+  //upvote da bude nazim
   const upFunction = (el) => {
-    if (localVote === "upvote" || el.givenVote === "upvote") {
+    if (el.givenVote === "upvote") {
       deleteUpVote(el);
     } else {
       upVote(el);
@@ -23,7 +28,7 @@ function QuoteCard({ el }) {
   };
 
   const downFunction = (el) => {
-    if (localVote === "downvote" || el.givenVote === "downvote") {
+    if (el.givenVote === "downvote") {
       deleteDownVote(el);
     } else {
       downVote(el);
@@ -36,29 +41,42 @@ function QuoteCard({ el }) {
         <Text className="main-content">{el.content}</Text>
         <Text className="main-author">{el.author}</Text>
       </Paper>
-      {/* <p>{el.upvotesCount}</p>
-      <p>{el.downvotesCount}</p>
-      <button
-        className={
-          localVote === "upvote" || el.givenVote === "upvote" ? "activeUp" : ""
-        }
-        onClick={() => upFunction(el)}
+      <div
+        style={{
+          height: "50px",
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+        }}
       >
-        Give up
-      </button>
-      <button
-        className={
-          localVote === "downvote" || el.givenVote === "downvote"
-            ? "activeUp"
-            : ""
-        }
-        onClick={() => downFunction(el)}
-      >
-        Give down
-      </button>
-      {el.givenVote}
-      <p>{votePercent.toFixed()}%</p>
-      <br></br> */}
+        <div className="flex">
+          <p>{el.downvotesCount}</p>
+          <button
+            className={el.givenVote === "downvote" ? "activeUp" : "noneActive"}
+            onClick={() => downFunction(el)}
+          >
+            <FontAwesomeIcon icon={faCaretDown} size={"xl"} />
+          </button>
+        </div>
+        <p>
+          {(
+            (100 / (el.upvotesCount + el.downvotesCount)) *
+            el.upvotesCount
+          ).toFixed()}
+          %
+        </p>
+        <div className="flex">
+          <button
+            className={el.givenVote === "upvote" ? "activeUp" : "noneActive"}
+            onClick={() => upFunction(el)}
+          >
+            <FontAwesomeIcon icon={faCaretUp} size="xl" />
+          </button>
+          <p>{el.upvotesCount}</p>
+        </div>
+      </div>
+      <br></br>
     </div>
   );
 }

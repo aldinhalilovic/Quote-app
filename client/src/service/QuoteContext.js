@@ -12,12 +12,22 @@ function QuoteContextProvider({ children }) {
   const [quoteList, setQuoteList] = useState([]);
   const [dataTags, setDataTags] = useState();
   const [tags, setTags] = useState([]);
-  const [currentVote, setCurrentVote] = useState("");
   const [totalPages, setTotalPages] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState([]);
   const [activePage, setPage] = useState(1);
   const [direction, setDirection] = useState("desc");
+
+  const updateQuotes = (updatedItem) => {
+    setQuoteList((oldQuotes) =>
+      oldQuotes.map((quote) => {
+        if (quote.id === updatedItem.id) {
+          return updatedItem;
+        }
+        return quote;
+      })
+    );
+  };
 
   const getQuotes = (tags) => {
     axios
@@ -45,32 +55,14 @@ function QuoteContextProvider({ children }) {
       .post(`http://localhost:8000/quotes/${el.id}/upvote`, null, {
         headers: { Authorization: "Bearer " + (token || lclToken) },
       })
-      .then(
-        (res) => (
-          console.log(res.data.givenVote),
-          setCurrentVote(res.data.givenVote),
-          LocalStorage.setLocalStorage(
-            `${el.id} currentvote`,
-            res.data.givenVote
-          )
-        )
-      );
+      .then((res) => updateQuotes(res.data));
   };
   const downVote = (el) => {
     axios
       .post(`http://localhost:8000/quotes/${el.id}/downvote`, null, {
         headers: { Authorization: "Bearer " + (token || lclToken) },
       })
-      .then(
-        (res) => (
-          // console.log(res.data.givenVote),
-          setCurrentVote(res.data.givenVote),
-          LocalStorage.setLocalStorage(
-            `${el.id} currentvote`,
-            res.data.givenVote
-          )
-        )
-      );
+      .then((res) => updateQuotes(res.data));
   };
 
   const deleteUpVote = (el) => {
@@ -78,16 +70,7 @@ function QuoteContextProvider({ children }) {
       .delete(`http://localhost:8000/quotes/${el.id}/upvote`, {
         headers: { Authorization: "Bearer " + (token || lclToken) },
       })
-      .then(
-        (res) => (
-          // console.log(res.data.givenVote),
-          setCurrentVote(res.data.givenVote),
-          LocalStorage.setLocalStorage(
-            `${el.id} currentvote`,
-            res.data.givenVote
-          )
-        )
-      );
+      .then((res) => updateQuotes(res.data));
   };
 
   const deleteDownVote = (el) => {
@@ -95,16 +78,7 @@ function QuoteContextProvider({ children }) {
       .delete(`http://localhost:8000/quotes/${el.id}/downvote`, {
         headers: { Authorization: "Bearer " + (token || lclToken) },
       })
-      .then(
-        (res) => (
-          console.log(res.data.givenVote),
-          setCurrentVote(res.data.givenVote),
-          LocalStorage.setLocalStorage(
-            `${el.id} currentvote`,
-            res.data.givenVote
-          )
-        )
-      );
+      .then((res) => updateQuotes(res.data));
   };
 
   const getTotalPages = () => {

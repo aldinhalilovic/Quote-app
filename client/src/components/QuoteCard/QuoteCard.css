@@ -1,7 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Special+Elite');
 
 .activeUp{
-    background-color: lightblue;    
+    background:white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;    
+}
+
+.noneActive{
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
 }
 
 .card-section{
