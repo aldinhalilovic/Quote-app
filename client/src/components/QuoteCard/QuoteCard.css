@@ -60,8 +60,8 @@
 
 .main-content:before {
     content: '“';
-    left: -2rem;
-    top: -3rem;
+    left: -1.7rem;
+    top: -2.9rem;
 }
 
 .main-content:after {
@@ -74,4 +74,31 @@
     font-family: 'Special Elite', cursive;
     line-height: 3;
     text-align: left;
+}
+
+.voteButton {
+    background: none;
+    border: none;
+    width: 35px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.voting{
+    height: 10px;
+    width: 45%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.votescount {
+    font-family: 'Special Elite', cursive;
+    font-weight: 900;
+}
+
+.votescounted{
+    font-weight: 700;
 }

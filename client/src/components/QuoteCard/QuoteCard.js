@@ -19,7 +19,7 @@ function QuoteCard({ el }) {
   );
 
   //upvote da bude nazim
-  const upFunction = (el) => {
+  const voteUp = (el) => {
     if (el.givenVote === "upvote") {
       deleteUpVote(el);
     } else {
@@ -27,7 +27,7 @@ function QuoteCard({ el }) {
     }
   };
 
-  const downFunction = (el) => {
+  const voteDown = (el) => {
     if (el.givenVote === "downvote") {
       deleteDownVote(el);
     } else {
@@ -41,39 +41,47 @@ function QuoteCard({ el }) {
         <Text className="main-content">{el.content}</Text>
         <Text className="main-author">{el.author}</Text>
       </Paper>
-      <div
-        style={{
-          height: "50px",
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-        }}
-      >
+      <div className="voting">
         <div className="flex">
-          <p>{el.downvotesCount}</p>
-          <button
-            className={el.givenVote === "downvote" ? "activeUp" : "noneActive"}
-            onClick={() => downFunction(el)}
-          >
-            <FontAwesomeIcon icon={faCaretDown} size={"xl"} />
+          <p className={el.givenVote === "downvote" ? "votescounted" : ""}>
+            {el.downvotesCount}
+          </p>
+          <button className="voteButton" onClick={() => voteDown(el)}>
+            {el.givenVote === "downvote" ? (
+              <FontAwesomeIcon
+                icon={faCaretDown}
+                size={"2xl"}
+                color={"white"}
+              />
+            ) : (
+              <FontAwesomeIcon icon={faCaretDown} size={"xl"} />
+            )}
           </button>
         </div>
-        <p>
-          {(
-            (100 / (el.upvotesCount + el.downvotesCount)) *
-            el.upvotesCount
-          ).toFixed()}
-          %
-        </p>
+        <div className="votescount">
+          {el.upvotesCount === 0 && el.downvotesCount === 0 ? (
+            <p>Vote</p>
+          ) : (
+            <p>
+              {(
+                (100 / (el.upvotesCount + el.downvotesCount)) *
+                el.upvotesCount
+              ).toFixed()}
+              %
+            </p>
+          )}
+        </div>
         <div className="flex">
-          <button
-            className={el.givenVote === "upvote" ? "activeUp" : "noneActive"}
-            onClick={() => upFunction(el)}
-          >
-            <FontAwesomeIcon icon={faCaretUp} size="xl" />
+          <button className="voteButton" onClick={() => voteUp(el)}>
+            {el.givenVote === "upvote" ? (
+              <FontAwesomeIcon icon={faCaretUp} size={"2xl"} color="white" />
+            ) : (
+              <FontAwesomeIcon icon={faCaretUp} size={"xl"} />
+            )}
           </button>
-          <p>{el.upvotesCount}</p>
+          <p className={el.givenVote === "upvote" ? "votescounted" : ""}>
+            {el.upvotesCount}
+          </p>
         </div>
       </div>
       <br></br>

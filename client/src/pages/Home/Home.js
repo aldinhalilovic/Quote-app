@@ -16,7 +16,6 @@ function Home() {
     getTags,
     getTotalPages,
     totalPages,
-    currentPage,
     sortBy,
     activePage,
     setPage,

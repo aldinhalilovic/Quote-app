@@ -44,6 +44,7 @@ function AddQuoteModal() {
         <div>
           <form
             height={300}
+            width={"60%"}
             style={{
               display: "flex",
             }}
