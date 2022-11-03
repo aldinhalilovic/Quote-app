@@ -1,24 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { QuoteContext } from "../../service/QuoteContext";
-import "./QuoteCard.css";
 import { Text, Paper } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCoffee,
-  faSolid,
-  faCaretUp,
-  faCaretDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import "./QuoteCard.css";
 
 function QuoteCard({ el }) {
   const { upVote, downVote, deleteUpVote, deleteDownVote } =
     useContext(QuoteContext);
 
-  const [votePercent, setVotePercent] = useState(
-    (100 / (el.upvotesCount + el.downvotesCount)) * el.upvotesCount
-  );
-
-  //upvote da bude nazim
   const voteUp = (el) => {
     if (el.givenVote === "upvote") {
       deleteUpVote(el);

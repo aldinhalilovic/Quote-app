@@ -2,9 +2,9 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../service/LoginContext";
 import { QuoteContext } from "../../service/QuoteContext";
-import LocalStorage from "../../helpers/LocalStorage";
 import QuoteCard from "../../components/QuoteCard/QuoteCard";
 import Navbar from "../../components/Navbar/Navbar";
+import LocalStorage from "../../helpers/LocalStorage";
 import { Pagination } from "@mantine/core";
 import "./Home.css";
 

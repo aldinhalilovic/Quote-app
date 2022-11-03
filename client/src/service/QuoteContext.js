@@ -29,7 +29,7 @@ function QuoteContextProvider({ children }) {
     );
   };
 
-  const getQuotes = (tags) => {
+  const getQuotes = () => {
     axios
       .get(
         `http://localhost:8000/quotes?tags=${tags}&pageSize=5&page=${activePage}&sortBy=${sortBy}&sortDirection=${direction}`,
@@ -37,9 +37,7 @@ function QuoteContextProvider({ children }) {
           headers: { Authorization: "Bearer " + (token || lclToken) },
         }
       )
-      .then(
-        (res) => (console.log(res.data.quotes), setQuoteList(res.data.quotes))
-      );
+      .then((res) => setQuoteList(res.data.quotes));
   };
 
   const getTags = () => {

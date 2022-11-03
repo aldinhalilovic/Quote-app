@@ -18,19 +18,17 @@ function AddQuoteModal() {
   const [axiosTags, setAxiosTags] = useState();
 
   const addQuote = () => {
-    axios
-      .post(
-        "http://localhost:8000/quotes",
-        {
-          content: axiosContent,
-          author: axiosAuthor,
-          tags: axiosTags,
-        },
-        {
-          headers: { Authorization: "Bearer " + (token || lclToken) },
-        }
-      )
-      .then((res) => console.log(res));
+    axios.post(
+      "http://localhost:8000/quotes",
+      {
+        content: axiosContent,
+        author: axiosAuthor,
+        tags: axiosTags,
+      },
+      {
+        headers: { Authorization: "Bearer " + (token || lclToken) },
+      }
+    );
   };
 
   return (
