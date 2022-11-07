@@ -7,6 +7,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import LocalStorage from "../../helpers/LocalStorage";
 import { Pagination } from "@mantine/core";
 import "./Home.css";
+import Footer from "../../components/Footer/Footer";
 
 function Home() {
   const {
@@ -88,6 +89,7 @@ function Home() {
           mb={30}
         />
       </div>
+      <Footer />
     </div>
   );
 }
