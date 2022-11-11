@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import LocalStorage from "../../helpers/LocalStorage";
-import { LoginContext } from "../../service/LoginContext";
+import { LoginContext } from "../../services/LoginContext";
+import { QuoteContext } from "../../services/QuoteContext";
 import { Button, Modal } from "@mantine/core";
 import "./AddQuoteModal.css";
 
@@ -9,6 +10,7 @@ function AddQuoteModal() {
   const localToken = LocalStorage.getLocalStorage("token");
   const [lclToken] = useState(localToken);
   const { token } = useContext(LoginContext);
+  const { setQuoteList } = useContext(QuoteContext);
   const [opened, setOpened] = useState(false);
   const [contentValue, setContentValue] = useState("");
   const [authorValue, setAuthorValue] = useState("");
@@ -16,19 +18,24 @@ function AddQuoteModal() {
   const [axiosAuthor, setAxiosAuthor] = useState();
   const [axiosContent, setAxiosContent] = useState();
   const [axiosTags, setAxiosTags] = useState();
+  const URL = process.env.REACT_APP_BASE_URL;
 
-  const addQuote = () => {
-    axios.post(
-      "http://localhost:8000/quotes",
-      {
-        content: axiosContent,
-        author: axiosAuthor,
-        tags: axiosTags,
-      },
-      {
-        headers: { Authorization: "Bearer " + (token || lclToken) },
-      }
-    );
+  const addQuote = (e) => {
+    e.preventDefault();
+    setOpened(false);
+    axios
+      .post(
+        `${URL}/quotes`,
+        {
+          content: axiosContent,
+          author: axiosAuthor,
+          tags: axiosTags,
+        },
+        {
+          headers: { Authorization: "Bearer " + (token || lclToken) },
+        }
+      )
+      .then((res) => setQuoteList((prev) => [res.data, ...prev]));
   };
 
   return (
@@ -46,7 +53,7 @@ function AddQuoteModal() {
             style={{
               display: "flex",
             }}
-            onSubmit={addQuote}
+            onSubmit={(e) => addQuote(e)}
           >
             <input
               type={"text"}
@@ -96,8 +103,9 @@ function AddQuoteModal() {
 
       <Button
         onClick={() => setOpened(true)}
-        variant={"transparent"}
+        variant={!opened ? "transparent" : ""}
         color="gray"
+        className="header bottom-border"
       >
         Add Quote
       </Button>

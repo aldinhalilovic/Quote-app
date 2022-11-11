@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "../../components/Footer/Footer";
 import "./Welcome.css";
 
 function Welcome() {

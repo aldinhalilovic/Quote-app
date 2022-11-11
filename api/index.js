@@ -10,6 +10,11 @@ const USERS = [
     password: "1234",
   },
   {
+    id: "da2d2151-13214fesfe-r2342",
+    username: "Aldin",
+    password: "1234",
+  },
+  {
     id: "a77d280e-94b8-4a1e-a869-1f14e622fa4e",
     username: "pera",
     password: "1234",
@@ -31,6 +36,7 @@ const USERS = [
 const TOKENS = {
   "ba13533b-e275-45a2-bc2e-b3098036d655":
     "d964099a-1a2a-46f5-9782-e2601b5aac9e",
+  "d21eawdw2-321321312": "da2d2151-13214fesfe-r2342",
   "csa31d3b-e275-45a2-bc2e-b3098036d655":
     "a77d280e-94b8-4a1e-a869-1f14e622fa4e",
   "popk376k-e275-45a2-bc2e-b3098036d655":

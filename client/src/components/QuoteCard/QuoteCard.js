@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { QuoteContext } from "../../service/QuoteContext";
+import { QuoteContext } from "../../services/QuoteContext";
 import { Text, Paper } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
@@ -41,14 +41,24 @@ function QuoteCard({ el }) {
               <FontAwesomeIcon
                 icon={faCaretDown}
                 size={"2xl"}
-                color={"white"}
+                style={{
+                  color: "rgb(196, 67, 67)",
+                }}
               />
             ) : (
               <FontAwesomeIcon icon={faCaretDown} size={"xl"} />
             )}
           </button>
         </div>
-        <div className="votescount">
+        <div
+          className={
+            el.givenVote === "upvote"
+              ? "votescount"
+              : "" || el.givenVote === "downvote"
+              ? "votescounted"
+              : ""
+          }
+        >
           {el.upvotesCount === 0 && el.downvotesCount === 0 ? (
             <p>Vote</p>
           ) : (
@@ -64,12 +74,16 @@ function QuoteCard({ el }) {
         <div className="flex">
           <button className="voteButton" onClick={() => voteUp(el)}>
             {el.givenVote === "upvote" ? (
-              <FontAwesomeIcon icon={faCaretUp} size={"2xl"} color="white" />
+              <FontAwesomeIcon
+                icon={faCaretUp}
+                size={"2xl"}
+                style={{ color: "green" }}
+              />
             ) : (
               <FontAwesomeIcon icon={faCaretUp} size={"xl"} />
             )}
           </button>
-          <p className={el.givenVote === "upvote" ? "votescounted" : ""}>
+          <p className={el.givenVote === "upvote" ? "votescount" : ""}>
             {el.upvotesCount}
           </p>
         </div>

@@ -1,13 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../../service/LoginContext";
-import { QuoteContext } from "../../service/QuoteContext";
+import { LoginContext } from "../../services/LoginContext";
+import { QuoteContext } from "../../services/QuoteContext";
+import LocalStorage from "../../helpers/LocalStorage";
 import QuoteCard from "../../components/QuoteCard/QuoteCard";
 import Navbar from "../../components/Navbar/Navbar";
-import LocalStorage from "../../helpers/LocalStorage";
-import { Pagination } from "@mantine/core";
-import "./Home.css";
 import Footer from "../../components/Footer/Footer";
+import { Pagination } from "@mantine/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import "./Home.css";
 
 function Home() {
   const {
@@ -62,7 +64,21 @@ function Home() {
     >
       <Navbar />
       <button onClick={sorting} className="buttonSorting">
-        {direction === "desc" ? "asc" : "desc"}
+        {direction === "desc" ? (
+          <>
+            <p>asc</p>
+            <p>
+              <FontAwesomeIcon icon={faCaretUp} size={"xl"} />
+            </p>
+          </>
+        ) : (
+          <>
+            <p>desc</p>
+            <p>
+              <FontAwesomeIcon icon={faCaretDown} size={"xl"} />
+            </p>
+          </>
+        )}
       </button>
       <div className="hero">
         <div className="quote-list">
@@ -75,13 +91,7 @@ function Home() {
         <Pagination
           page={activePage}
           onChange={setPage}
-          onClick={() =>
-            window.scroll({
-              top: 0,
-              left: 0,
-              behavior: "smooth",
-            })
-          }
+          onClick={() => window.scroll(0, 0)}
           total={Math.ceil(totalPages / 5)}
           color="gray"
           radius="lg"

@@ -9,9 +9,11 @@ function LoginContextProvider({ children }) {
   const [rememberMe, setRememberMe] = useState(false);
   const [token, setToken] = useState(null);
 
+  const URL = process.env.REACT_APP_BASE_URL;
+
   const getToken = () => {
     axios
-      .post("http://localhost:8000/sessions", {
+      .post(`${URL}/sessions`, {
         username: loginUsername,
         password: loginPassword,
       })
