@@ -45,13 +45,13 @@ function Home() {
       setToken(tkn);
     } else if (token === null) {
       navigate("/");
-    }
+    } // eslint-disable-next-line
   }, [token]);
 
   useEffect(() => {
     getQuotes(tags);
     getTags();
-    getTotalPages();
+    getTotalPages(); // eslint-disable-next-line
   }, [tags, activePage, sortBy, direction]);
 
   return (

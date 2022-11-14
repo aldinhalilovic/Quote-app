@@ -15,7 +15,7 @@ function Login() {
       navigate("/homepage");
     } else if (token) {
       navigate("/homepage");
-    }
+    } // eslint-disable-next-line
   }, [token]);
 
   return (

@@ -70,8 +70,8 @@ function Navbar() {
               <Collapse in={collapse}>
                 <ScrollArea className="scrollarea">
                   <ul>
-                    {dataTags?.map((el) => (
-                      <li>
+                    {dataTags?.map((el, index) => (
+                      <li key={index}>
                         <>
                           <input
                             type="checkbox"
@@ -79,7 +79,7 @@ function Navbar() {
                             id={el}
                             onClick={(e) => helpTagFunction(e)}
                           />
-                          <label for={el}>{el}</label>
+                          <label htmlFor={el}>{el}</label>
                         </>
                       </li>
                     ))}
@@ -111,7 +111,7 @@ function Navbar() {
                         className="inputsize"
                         onClick={(e) => helpSortFunction(e)}
                       />
-                      <label for="createdAt">createdAt</label>
+                      <label htmlFor="createdAt">createdAt</label>
                     </li>
                     <li>
                       <input
@@ -121,7 +121,7 @@ function Navbar() {
                         className="inputsize"
                         onClick={(e) => helpSortFunction(e)}
                       />
-                      <label for="author">author</label>
+                      <label htmlFor="author">author</label>
                     </li>
                     <li>
                       <input
@@ -131,7 +131,7 @@ function Navbar() {
                         className="inputsize"
                         onClick={(e) => helpSortFunction(e)}
                       />
-                      <label for="upvotesCount">upvotesCount</label>
+                      <label htmlFor="upvotesCount">upvotesCount</label>
                     </li>
                   </ul>
                 </div>

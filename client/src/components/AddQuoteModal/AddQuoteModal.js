@@ -89,6 +89,7 @@ function AddQuoteModal() {
                 className="inputposition marginL"
                 type="submit"
                 onClick={() => (
+                  // eslint-disable-next-line
                   setAxiosContent(contentValue),
                   setAxiosAuthor(authorValue),
                   setAxiosTags(tagsValue.split(","))

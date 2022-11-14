@@ -24,6 +24,7 @@ function Footer() {
             <a
               href="https://github.com/aldinhalilovic"
               target="_blank"
+              rel="noreferrer"
               style={{
                 textDecoration: "none",
                 color: "black",
@@ -34,6 +35,7 @@ function Footer() {
             <a
               href="https://instagram.com/hallilovic.a"
               target="_blank"
+              rel="noreferrer"
               style={{
                 textDecoration: "none",
                 color: "black",

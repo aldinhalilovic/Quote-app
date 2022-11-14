@@ -25,7 +25,7 @@ const RemoveLocalStorage = (key) => {
 const RemoveAllLocalStorage = () => {
   localStorage.clear();
 };
-
+// eslint-disable-next-line
 export default {
   setLocalStorage: SetLocalStorage,
   getLocalStorage: GetLocalStorage,

@@ -32,7 +32,7 @@ function LoginCard() {
       navigate("/homepage");
     } else if (token) {
       navigate("/homepage");
-    }
+    } // eslint-disable-next-line
   }, [token]);
 
   const [localUsername, setLocalUsername] = useState("");
@@ -40,6 +40,7 @@ function LoginCard() {
 
   return (
     <div>
+      {/*  eslint-disable-next-line */}
       <form onSubmit={(e) => (e.preventDefault(), getToken())}>
         <Container size={420} mb={90}>
           <Title
@@ -88,6 +89,7 @@ function LoginCard() {
               fullWidth
               mt="xl"
               onClick={() => (
+                // eslint-disable-next-line
                 setLoginUsername(localUsername), setLoginPassword(localPassword)
               )}
             >
